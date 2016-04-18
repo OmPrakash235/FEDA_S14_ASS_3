@@ -1,0 +1,46 @@
+<!-- Create a factory display all with NAME, AGE, EMPLOYEEID and Salary in a table. -->
+
+<html ng-app="myApp">
+	<head>
+		<title>AngularJS Service</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+		<script type="text/javascript">
+			var module = angular.module('myApp', []);
+			module.factory('empService', function(){
+				return {
+					getEmpDetails : [
+						{'emp_id': '218', 'emp_name': 'OM PRAKASH', 'emp_age': '27', 'emp_sal': '18000'},
+						{'emp_id': '225', 'emp_name': 'Devraaj', 'emp_age': '28', 'emp_sal': '25000'},
+						{'emp_id': '238', 'emp_name': 'Mrinal', 'emp_age': '29', 'emp_sal': '28000'}
+					]
+				}
+			});
+			module.controller('myCtrl', function($scope, empService){	
+				$scope.emp = empService.getEmpDetails;
+			});
+		</script>
+	</head>
+	<body class="container">
+		<div class="col-sm-3"></div>
+		<div ng-controller="myCtrl" class="col-sm-6">
+			<table class="table">
+				<tr>
+					<th>EMP-ID</th>
+					<th>NAME</th>
+					<th>AGE</th>
+					<th>SALARY</th>
+				</tr>
+				<tr ng-repeat="emp in emp">
+					<td>{{emp.emp_id}}</td>
+					<td>{{emp.emp_name}}</td>
+					<td>{{emp.emp_age}}</td>
+					<td>{{emp.emp_sal | currency : 'INR ' : 2}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-3"></div>
+	</body> 
+</html>
